@@ -41,8 +41,9 @@ if not api_key:
 
    
     
-#llm=ChatGroq(groq_api_key=api_key,model='Llama3-8b-8192',streaming=True)   
-llm=ChatGroq(groq_api_key=api_key,model='gemma-7b-it',streaming=True) 
+#llm=ChatGroq(groq_api_key=api_key,model='Llama3-8b-8192',streaming=True)  
+if api_key:
+   llm=ChatGroq(groq_api_key=api_key,model='gemma-7b-it',streaming=True) 
 
 @st.cache_resource(ttl="2h")
 
@@ -90,6 +91,7 @@ if user_query:
         response=agent.run(user_query,callbacks=[streamlit_callback])
         st.session_state.messages.append({"role":"assistant","content":response})
         st.write(response)
+
 
 
 
